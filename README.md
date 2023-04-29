@@ -39,6 +39,7 @@ We will be using the D3.js library to implement this section, providing a clear 
 
 ### Project User Stories
 
+- [ ] As a user, I want to load the WEB Application and be prompted to enter the app by entering my User & Password credentials.
 - [ ] As a user, I want to view a list of available markers and select a specific marker to view its properties.
 - [ ] As a user, I want to be able to update the properties of a selected marker, such as its name or [X,Y,Z] location.
 - [ ] As a user, I want to be able to view the markers in a 3D space and interact with them by panning, zooming, and clicking on them to view their latest readings and status, for example their latest temperature reading.
@@ -48,7 +49,13 @@ We will be using the D3.js library to implement this section, providing a clear 
 
 ### Project Use Cases:
 
-1. Viewing the marker list
+1. Login View
+
+- [ ] The user will not see any markers in the marker list and would not be able to utilize the 2D or the 3D views.
+- [ ] The user enters its Username & Password to enter the application and load the Marker data.
+  - [ ] If the User & Pass combination is valid, a welcome message is displayed using the username, for example, 'Welcome Bob!'.
+
+2. Viewing the marker list
 
 - [ ] The application retrieves the list of available markers. 
   - [ ] This is done at the beginning when the web app is loaded from the backend API endpoint.
@@ -59,7 +66,7 @@ We will be using the D3.js library to implement this section, providing a clear 
   - [ ] The user views the list of markers by scrolling up and down from the list.
   - [ ] The user selects a specific marker to view its properties.
 
-2. Updating marker properties
+3. Updating marker properties
 
 - [ ] The user selects a marker from the marker list section.
   - [ ] The application displays the properties of the selected marker.
@@ -69,7 +76,7 @@ We will be using the D3.js library to implement this section, providing a clear 
   - [ ] The application sends a request to the backend API to update the marker properties.
   - [ ] (optional) If offline editing functionality would be disabled.
 
-3. Viewing markers in 3D space
+4. Viewing markers in 3D space
 
 - [ ] The user navigates to the 3D view section of the application.
   - [ ] The application uses the retrieved the list of available markers to displays them in a 3D space as orbs.
@@ -77,18 +84,47 @@ We will be using the D3.js library to implement this section, providing a clear 
   - [ ] When the user clicks on a marker, the application displays its latest readings and marker name in a popup next to the Marker orb.
   - [ ] When the user clicks on a different marker or some other place in the 3D view the popup box from the previous Marker would be removed, and if a new marker was clicked a new popup box would be displayed for that new Marker.
 
-4. Viewing marker traces on a line chart
+5. Viewing marker traces on a line chart
 
 - [ ] The user selects a marker from the marker list section or the 3D view section.
   - [ ] The application retrieves the latest readings for the selected marker from the backend API endpoint.
   - [ ] The application displays the traces of the marker readings in a simple line chart, for example the temperature readings.
   - [ ] (optional) If offline the Marker readings collected previously would be used to draw the line chart.
 
-5. Ensuring fast and responsive performance
+6. Ensuring fast and responsive performance
 
 - [ ] The application uses techniques such as code splitting, lazy loading, and caching to minimize unnecessary requests to the backend.
 - [ ] The application is optimized for load speed and performance, with fast load times and smooth interactions.
 - [ ] The application's performance is evaluated using Google Lighthouse or other performance monitoring tools, and any issues are addressed to ensure high performance and user satisfaction.
+
+# Available API Endpoints
+
+Following are all available API endpoints, however, the ones that are checked would only be used.
+
+- [ ] GET		/objects/{objectsId}: Get a object by its ID.
+- [ ] PUT		/objects/{objectsId}: Update an object by its ID.
+- [ ] PATCH		/objects/{objectsId}: Partially update an object by its ID.
+- [ ] GET 		/objects/count: Get the total number of objects in the system.
+- [ ] GET 		/objects/type/{type}: Get all objects with a given type (e.g. 0 for Unspecified or 1 for Markers).
+- [ ] GET 		/objects/hole/{holeId}: Get all objects with a given holeId.
+- [x] GET		/markers/{markerId}: Get a marker by its ID.
+- [ ] PUT		/markers/{markerId}: Update a marker by its ID.
+- [x] PATCH		/markers/{markerId}: Partially update a marker by its ID.
+- [ ] GET		/markers/serial/{serial}: Get a marker by its serial.
+- [ ] GET		/markers/type/{type}: Get all markers of a given type.
+- [ ] GET		/markers/hole/{holeId}: Get all markers of a given holeId.
+- [ ] GET		/markers/address/{subnet}: Get all markers of a given subnet address.
+- [ ] GET		/markers/address/{subnet}/{node}: Get a marker with a given subnet and node address.
+- [ ] POST		/markers: Add a new marker.
+- [x] GET		/markers: Get all marker.
+- [x] GET		/markers/{markerId}/readings: Get all readings for a specific Marker by its ID. 
+- [ ] GET		/markers/{markerId}/readings?limit=10: Get the first 10 readings for a specific Marker by its ID. 
+- [ ] GET		/markers/{markerId}/readings?limit=10&start_timestamp=startTimestamp=2023-02-20%2023:00:01: Get the first 10 readings from 2023-02-20 23:00:01 (UTC) for a specific Marker by its ID.
+- [ ] GET		/markers/{markerId}/readings?limit=10&start_timestamp=startTimestamp=2023-02-20%2023:00:01&endTimestamp=2023-02-21%2000:00:01: Get the first 10 readings between 2023-02-20 23:00:01 and 2023-02-21 00:00:01 (UTC) for a specific Marker by its ID.
+- [ ] GET		/markers/{markerId}/readings/count: Get the total number of readings for a specific Marker by its ID.
+- [ ] POST		/markers/{markerId}/readings: Add a new reading for a specific Marker by its ID.
+- [ ] PUT 		/markers/{markerId}/readings/{readingId}: Update a specific reading for a specific Marker by its ID and reading ID.
+- [ ] DELETE 	/markers/{markerId}/readings/{readingId}: Delete a specific reading for a specific Marker by its ID and reading ID.
 
 #Getting started
 Explain how to set up the project locally, including any necessary dependencies and installation instructions. This section should be clear and concise to make it easy for someone to get started with your project.
