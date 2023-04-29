@@ -37,6 +37,59 @@ We will be using the D3.js library to implement this section, providing a clear 
 - basic end-to-end testing is also needed.
 - The end result of the project must be a highly performant and user-friendly web application that provides a seamless experience for managing and viewing marker data in both 2D and 3D spaces.
 
+### Project User Stories
+
+- [ ] As a user, I want to view a list of available markers and select a specific marker to view its properties.
+- [ ] As a user, I want to be able to update the properties of a selected marker, such as its name or [X,Y,Z] location.
+- [ ] As a user, I want to be able to view the markers in a 3D space and interact with them by panning, zooming, and clicking on them to view their latest readings and status, for example their latest temperature reading.
+- [ ] As a user, I want to be able to view the traces of the marker readings in a simple line chart when a marker is selected, for example its temperature readings.
+- [ ] As a user, I want the application to be fast and responsive, with minimal load times and smooth interactions.
+- [ ] As a user, I want the application to be accessible while offline (PWA), to be able to view the previously retrieved marker readings.
+
+### Project Use Cases:
+
+1. Viewing the marker list
+
+- [ ] The application retrieves the list of available markers. 
+  - [ ] This is done at the beginning when the web app is loaded from the backend API endpoint.
+  - [ ] A reload button should also be available to fetch new information from the backend API endpoint.
+  - [ ] (optional) If offline the application would use the previously retrieved marker list in memory.
+  - [ ] (optional) A periodic thread needs to pull the backend API endpoint.
+- [ ] The user navigates to the marker list section of the application.
+  - [ ] The user views the list of markers by scrolling up and down from the list.
+  - [ ] The user selects a specific marker to view its properties.
+
+2. Updating marker properties
+
+- [ ] The user selects a marker from the marker list section.
+  - [ ] The application displays the properties of the selected marker.
+  - [ ] The property section displays the marker name in a text box.
+  - [ ] The property section displays the marker [X,Y,Z] location with three number fields that accept float values.
+- [ ] The user updates one or more properties of the marker, such as its name or [X,Y,Z] location.
+  - [ ] The application sends a request to the backend API to update the marker properties.
+  - [ ] (optional) If offline editing functionality would be disabled.
+
+3. Viewing markers in 3D space
+
+- [ ] The user navigates to the 3D view section of the application.
+  - [ ] The application uses the retrieved the list of available markers to displays them in a 3D space as orbs.
+- [ ] The user can interact with the markers by panning, zooming, and clicking on them.
+  - [ ] When the user clicks on a marker, the application displays its latest readings and marker name in a popup next to the Marker orb.
+  - [ ] When the user clicks on a different marker or some other place in the 3D view the popup box from the previous Marker would be removed, and if a new marker was clicked a new popup box would be displayed for that new Marker.
+
+4. Viewing marker traces on a line chart
+
+- [ ] The user selects a marker from the marker list section or the 3D view section.
+  - [ ] The application retrieves the latest readings for the selected marker from the backend API endpoint.
+  - [ ] The application displays the traces of the marker readings in a simple line chart, for example the temperature readings.
+  - [ ] (optional) If offline the Marker readings collected previously would be used to draw the line chart.
+
+5. Ensuring fast and responsive performance
+
+- [ ] The application uses techniques such as code splitting, lazy loading, and caching to minimize unnecessary requests to the backend.
+- [ ] The application is optimized for load speed and performance, with fast load times and smooth interactions.
+- [ ] The application's performance is evaluated using Google Lighthouse or other performance monitoring tools, and any issues are addressed to ensure high performance and user satisfaction.
+
 #Getting started
 Explain how to set up the project locally, including any necessary dependencies and installation instructions. This section should be clear and concise to make it easy for someone to get started with your project.
 
