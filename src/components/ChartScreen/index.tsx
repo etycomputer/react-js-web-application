@@ -1,5 +1,7 @@
+import { Card } from "@tremor/react";
+
 const ChartScreen = () => {
-  return <div></div>;
+  return <Card />;
 };
 
 export default ChartScreen;

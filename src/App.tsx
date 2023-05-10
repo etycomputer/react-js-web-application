@@ -1,32 +1,26 @@
-import { Card, Tab, TabList } from "@tremor/react";
+import { Tab, TabList } from "@tremor/react";
 import React from "react";
-import ListScreen from "./components/ListScreen";
 import ChartScreen from "./components/ChartScreen";
+import MarkersListScreen from "./components/MarkersListScreen";
 
-type TabNameType = "list" | "chart";
+type TabNameType = "markersList" | "chart";
 
 function App() {
-  const [selectedTab, setSelectedTab] = React.useState<TabNameType>("list");
+  const [selectedTab, setSelectedTab] =
+    React.useState<TabNameType>("markersList");
 
   return (
-    <main className="bg-slate-50 p-6 w-full h-screen">
+    <main className="bg-slate-50 p-6 w-full min-h-screen">
       <TabList
-        defaultValue="list"
+        defaultValue="markersList"
         onValueChange={(value) => setSelectedTab(value as TabNameType)}
+        className="mb-6"
       >
-        <Tab value="list" text="List" />
+        <Tab value="markersList" text="List" />
         <Tab value="chart" text="Chart" />
       </TabList>
 
-      {selectedTab === "list" ? (
-        <Card className="mt-6">
-          <ListScreen />
-        </Card>
-      ) : (
-        <Card className="mt-6">
-          <ChartScreen />
-        </Card>
-      )}
+      {selectedTab === "markersList" ? <MarkersListScreen /> : <ChartScreen />}
     </main>
   );
 }
