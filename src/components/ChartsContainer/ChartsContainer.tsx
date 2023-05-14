@@ -1,7 +1,7 @@
 import { Tab, TabList } from "@tremor/react";
 import React from "react";
 import { sampleData as markers } from "../MarkersList/sampleData";
-import ThreeDimentionChart from "./ThreeDimentionChart";
+import ThreeDimentionChart from "../ThreeDimentionChart";
 
 type TabNameType = "3D" | "2D";
 
