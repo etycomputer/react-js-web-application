@@ -17,14 +17,17 @@
     "@react-three/fiber": "^8.13.0",
     "@tremor/react": "^2.4.0",
     "axios": "^1.4.0",
+    "d3": "^7.8.4",
     "msw": "^1.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-use": "^17.4.0",
+    "recharts": "^2.6.2",
     "swr": "^2.1.5",
     "three": "^0.152.2"
   },
   "devDependencies": {
+    "@types/d3": "^7.4.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@types/three": "^0.152.0",
@@ -41,4 +44,3 @@
     "vite": "^4.3.2"
   }
 }
-
