@@ -1,5 +1,3 @@
-import { Title, List, ListItem, Badge, Button } from "@tremor/react";
-import { Marker } from "../../generatedApis";
 import {
   AcademicCapIcon,
   PencilIcon,
@@ -7,7 +5,9 @@ import {
   TrashIcon,
   WrenchIcon,
 } from "@heroicons/react/24/outline";
+import { Badge, Button, List, ListItem, Title } from "@tremor/react";
 import React from "react";
+import { Marker } from "../../generatedApis";
 
 interface PropsType {
   marker: Marker;
@@ -22,7 +22,7 @@ function MarkerDetails({ marker }: PropsType) {
   return (
     <div className="max-h-[40vh] overflow-auto">
       <div className="flex justify-between">
-        <Title>Marker Details</Title>
+        <Title>Details</Title>
         <div className="flex">
           {isEditing ? (
             <>
@@ -71,16 +71,24 @@ function MarkerDetails({ marker }: PropsType) {
       </div>
       <List>
         <ListItem>
-          <span>Node</span>
-          <span>{marker.node}</span>
-        </ListItem>
-        <ListItem>
           <span>Subnet</span>
           <span>{marker.subnet}</span>
         </ListItem>
         <ListItem>
-          <span>Install Position</span>
-          <pre>{JSON.stringify(marker.installPosition, null, "\t")}</pre>
+          <span>Node</span>
+          <span>{marker.node}</span>
+        </ListItem>
+        <ListItem>
+          <span>X</span>
+          <span>{marker.installPosition.x}</span>
+        </ListItem>
+        <ListItem>
+          <span>Y</span>
+          <span>{marker.installPosition.y}</span>
+        </ListItem>
+        <ListItem>
+          <span>Z</span>
+          <span>{marker.installPosition.z}</span>
         </ListItem>
         <ListItem>
           <span>Activated</span>

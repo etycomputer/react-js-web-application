@@ -8,8 +8,7 @@ interface PropsType {
 function MarkerRow({ marker }: PropsType) {
   return (
     <TableRow>
-      <TableCell className="">{`${marker.node}.${marker.subnet}`}</TableCell>
-      <TableCell className="">{"-"}</TableCell>
+      <TableCell className="">{`Marker ${marker.subnet}.${marker.node}`}</TableCell>
     </TableRow>
   );
 }
