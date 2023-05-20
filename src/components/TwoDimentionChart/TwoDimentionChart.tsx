@@ -9,13 +9,21 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { Reading } from "../../generatedApis";
+import { Marker } from "../../generatedApis";
+import { getSampleData } from "./sampleData";
+
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 interface PropsType {
-  readings: Reading[];
+  selectedMarkers: Marker[];
 }
 
-function TwoDimentionChart({ readings }: PropsType) {
+function TwoDimentionChart({ selectedMarkers }: PropsType) {
+  const markersReadings = selectedMarkers.map((marker) => ({
+    marker,
+    readings: getSampleData(),
+  }));
+
   return (
     <ResponsiveContainer width="99%" height="90%">
       <ScatterChart margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
@@ -24,16 +32,19 @@ function TwoDimentionChart({ readings }: PropsType) {
         <YAxis dataKey="temperature" />
         <Tooltip />
         <Legend />
-        <Scatter
-          name={`Marker {marker.subnet}.{marker.node}`}
-          data={readings.map((reading) => ({
-            ...reading,
-            timestamp: reading.timestamp.toLocaleString(),
-          }))}
-          fill="#8884d8"
-          line
-          shape={(props) => <Dot {...props} r={props.payload.temperature} />}
-        />
+        {markersReadings.map(({ marker, readings }, index) => (
+          <Scatter
+            key={`Marker ${marker.subnet}.${marker.node}`}
+            name={`Marker ${marker.subnet}.${marker.node}`}
+            data={readings.map((reading) => ({
+              ...reading,
+              timestamp: reading.timestamp.toLocaleString(),
+            }))}
+            fill={COLORS[index % COLORS.length]}
+            line
+            shape={(props) => <Dot {...props} r={props.payload.temperature} />}
+          />
+        ))}
       </ScatterChart>
     </ResponsiveContainer>
   );

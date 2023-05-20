@@ -3,13 +3,14 @@ import React from "react";
 import * as THREE from "three";
 import { Marker } from "../../generatedApis";
 
-function MarkerMesh({
-  position,
-  marker,
-}: {
+interface PropsType {
   position: THREE.Vector3;
   marker: Marker;
-}) {
+  onClick: () => void;
+  isSelected: boolean;
+}
+
+function MarkerMesh({ position, marker, onClick, isSelected }: PropsType) {
   const meshRef = React.useRef<THREE.Mesh | null>(null);
 
   const [hovered, setHovered] = React.useState(false);
@@ -21,11 +22,14 @@ function MarkerMesh({
       userData={{ marker }}
       position={position}
       ref={meshRef}
-      scale={0.5}
+      scale={isSelected ? 0.6 : 0.5}
       onPointerOver={() => setHovered(true)}
       onPointerLeave={() => setHovered(false)}
+      onClick={() => onClick()}
     >
-      <meshStandardMaterial color={hovered ? "hotpink" : "orange"} />
+      <meshStandardMaterial
+        color={hovered ? "hotpink" : isSelected ? "blue" : "orange"}
+      />
     </Sphere>
   );
 }

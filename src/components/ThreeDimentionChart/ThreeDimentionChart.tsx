@@ -8,20 +8,31 @@ import MarkersMesh from "./MarkersMesh";
 
 interface ThreeSceneProps {
   markers: Marker[];
+  selectedMarkers: Marker[];
+  setSelectedMarkers: React.Dispatch<React.SetStateAction<Marker[]>>;
 }
 
-function ThreeDimentionChart({ markers }: ThreeSceneProps) {
+function ThreeDimentionChart({
+  markers,
+  selectedMarkers,
+  setSelectedMarkers,
+}: ThreeSceneProps) {
   const [hoveredMarker, setHoveredMarker] = React.useState<Marker>();
 
   return (
     <>
       <Canvas camera={{ position: [0, 1, 35], fov: 90 }}>
         <hemisphereLight intensity={1} color="white" groundColor="red" />
-        <MarkersMesh markers={markers} />
+        <MarkersMesh
+          markers={markers}
+          selectedMarkers={selectedMarkers}
+          setSelectedMarkers={setSelectedMarkers}
+        />
         <TrackballControls />
         <Grid infiniteGrid />
         <CycleRaycast
-          preventDefault={true}
+          // we can't type in inputs when it's equal to true.
+          preventDefault={false}
           onChanged={(objects) => {
             setHoveredMarker(
               objects[0]?.object.userData?.marker as Marker | undefined

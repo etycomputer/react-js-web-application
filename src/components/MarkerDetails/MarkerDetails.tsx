@@ -1,26 +1,24 @@
 import {
-  AcademicCapIcon,
   PencilIcon,
   StopIcon,
   TrashIcon,
   WrenchIcon,
 } from "@heroicons/react/24/outline";
-import { Badge, Button, List, ListItem, Title } from "@tremor/react";
+import { Button, Title } from "@tremor/react";
 import React from "react";
 import { Marker } from "../../generatedApis";
 
+import DetailsList from "./DetailsList";
+
 interface PropsType {
-  marker: Marker;
+  marker?: Marker;
 }
 
 function MarkerDetails({ marker }: PropsType) {
   const [isEditing, setIsEditing] = React.useState(false);
-  // const [markerToEdit, setMarkerToEdit] = React.useState(
-  //   structuredClone(marker)
-  // );
 
   return (
-    <div className="max-h-[40vh] overflow-auto">
+    <div className="h-[40vh] overflow-y-scroll pr-1">
       <div className="flex justify-between">
         <Title>Details</Title>
         <div className="flex">
@@ -53,6 +51,7 @@ function MarkerDetails({ marker }: PropsType) {
                 variant="light"
                 icon={PencilIcon}
                 onClick={() => setIsEditing(true)}
+                disabled={!marker}
               >
                 Edit
               </Button>
@@ -62,6 +61,7 @@ function MarkerDetails({ marker }: PropsType) {
                 variant="light"
                 icon={TrashIcon}
                 color="rose"
+                disabled={!marker}
               >
                 Delete
               </Button>
@@ -69,41 +69,7 @@ function MarkerDetails({ marker }: PropsType) {
           )}
         </div>
       </div>
-      <List>
-        <ListItem>
-          <span>Subnet</span>
-          <span>{marker.subnet}</span>
-        </ListItem>
-        <ListItem>
-          <span>Node</span>
-          <span>{marker.node}</span>
-        </ListItem>
-        <ListItem>
-          <span>X</span>
-          <span>{marker.installPosition.x}</span>
-        </ListItem>
-        <ListItem>
-          <span>Y</span>
-          <span>{marker.installPosition.y}</span>
-        </ListItem>
-        <ListItem>
-          <span>Z</span>
-          <span>{marker.installPosition.z}</span>
-        </ListItem>
-        <ListItem>
-          <span>Activated</span>
-          <Badge
-            color={marker.activated ? "emerald" : "pink"}
-            icon={AcademicCapIcon}
-          >
-            {marker.activated ? "Activated" : "Disabled"}
-          </Badge>
-        </ListItem>
-        <ListItem>
-          <span>Activation Time</span>
-          <span>{marker.activationTime?.toLocaleString() || "-"}</span>
-        </ListItem>
-      </List>
+      {marker ? <DetailsList isEditing={isEditing} marker={marker} /> : null}
     </div>
   );
 }

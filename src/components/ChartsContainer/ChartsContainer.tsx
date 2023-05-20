@@ -1,13 +1,18 @@
 import { Tab, TabList } from "@tremor/react";
 import React from "react";
+import { Marker } from "../../generatedApis";
 import { sampleData as markers } from "../MarkersList/sampleData";
 import ThreeDimentionChart from "../ThreeDimentionChart";
 import TwoDimentionChart from "../TwoDimentionChart";
-import { sampleData } from "../TwoDimentionChart/sampleData";
 
 type TabNameType = "3D" | "2D";
 
-function ChartsContainer() {
+interface PropsType {
+  selectedMarkers: Marker[];
+  setSelectedMarkers: React.Dispatch<React.SetStateAction<Marker[]>>;
+}
+
+function ChartsContainer({ selectedMarkers, setSelectedMarkers }: PropsType) {
   const [selectedTab, setSelectedTab] = React.useState<TabNameType>("3D");
 
   return (
@@ -22,9 +27,13 @@ function ChartsContainer() {
       </TabList>
 
       {selectedTab === "3D" ? (
-        <ThreeDimentionChart markers={markers} />
+        <ThreeDimentionChart
+          markers={markers}
+          selectedMarkers={selectedMarkers}
+          setSelectedMarkers={setSelectedMarkers}
+        />
       ) : (
-        <TwoDimentionChart readings={sampleData} />
+        <TwoDimentionChart selectedMarkers={selectedMarkers} />
       )}
     </div>
   );

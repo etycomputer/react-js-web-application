@@ -1,12 +1,19 @@
-import { Select } from "@react-three/drei";
 import React from "react";
 import * as THREE from "three";
 import { Marker } from "../../generatedApis";
 import MarkerMesh from "./MarkerMesh";
 
-function MarkersMesh({ markers }: { markers: Marker[] }) {
-  const [selected, setSelected] = React.useState<THREE.Object3D[]>([]);
-  // const selected = useSelect();
+interface PropsType {
+  markers: Marker[];
+  selectedMarkers: Marker[];
+  setSelectedMarkers: React.Dispatch<React.SetStateAction<Marker[]>>;
+}
+
+function MarkersMesh({
+  markers,
+  selectedMarkers,
+  setSelectedMarkers,
+}: PropsType) {
   const markersToRender = React.useMemo(() => {
     const spherical = new THREE.Spherical();
 
@@ -23,11 +30,31 @@ function MarkersMesh({ markers }: { markers: Marker[] }) {
   }, [markers]);
 
   return (
-    <Select multiple box onChange={setSelected}>
-      {markersToRender.map(([pos, marker], index) => (
-        <MarkerMesh key={index} position={pos} marker={marker} />
-      ))}
-    </Select>
+    <>
+      {markersToRender.map(([pos, marker], index) => {
+        const isSelected = Boolean(
+          selectedMarkers.find(({ markerId }) => markerId === marker.markerId)
+        );
+
+        return (
+          <MarkerMesh
+            key={index}
+            position={pos}
+            marker={marker}
+            isSelected={isSelected}
+            onClick={() => {
+              if (isSelected) {
+                setSelectedMarkers((prev) =>
+                  prev.filter(({ markerId }) => markerId !== marker.markerId)
+                );
+              } else {
+                setSelectedMarkers((prev) => [...prev, marker]);
+              }
+            }}
+          />
+        );
+      })}
+    </>
   );
 }
 
